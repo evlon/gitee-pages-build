@@ -2,9 +2,19 @@
   "name": "gitee-pages-build",
   "version": "0.1.0",
   "main": "index.js",
-  "repository": "git@github.com:evlon/gitee-pages-build.git",
   "author": "evlon <evlon@qq.com>",
   "license": "MIT",
+  "type": "module",
+  "exports": {
+    "import": "./index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/evlon/gitee-pages-build.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evlon/gitee-pages-build/issues"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
