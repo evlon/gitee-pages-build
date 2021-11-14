@@ -2,7 +2,7 @@
   "name": "gitee-pages-build",
   "version": "0.0.1",
   "main": "index.js",
-  "author": "evlon <evlon@qq.com>",
+  "author": "evlon<evlon@qq.com>",
   "license": "MIT",
   "type": "module",
   "exports": {
