@@ -115,6 +115,7 @@ class GiteePage {
         respText = await resp.text();
 
         if (resp.url != login_index_url) {
+            //redirect to / when ok.
             return true;
         }
 
@@ -140,6 +141,8 @@ class GiteePage {
             || respText.indexOf('我的工作臺') != -1)) {
             throw `Unknown error occurred in login method, resp: ${respText}`;
         }
+
+        return false;
     }
 
 
@@ -180,6 +183,8 @@ class GiteePage {
         if (respText.indexOf("请勿频繁更新部署，稍等1分钟再试试看") != -1) {
             throw 'Do not deploy frequently, try again one minute later.'
         }
+
+        return true;
     }
 
     get_csrf_token(html) {

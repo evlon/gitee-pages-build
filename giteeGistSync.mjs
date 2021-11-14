@@ -13,8 +13,12 @@ async function sync(token, gistid, file){
         if(gistBlob){
             let gitContent = gistBlob.content;
             fs.writeFileSync(file, gitContent,{encoding:'utf-8'});
+
+            return true;
         }       
     }
+
+    return false;
 
 }
 
@@ -43,6 +47,7 @@ async function save(token, file,gistid){
     else{
 
         console.log(resp.status, await resp.text());
+        return false;
     }
 
 }
