@@ -733,11 +733,6 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
-gitee-client@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmmirror.com/gitee-client/download/gitee-client-0.2.0.tgz#88aa04a419e949c96d6d429def679e5c4d46535a"
-  integrity sha1-iKoEpBnpScltbUKd72eeXE1GU1o=
-
 glob-parent@^5.0.0:
   version "5.1.2"
   resolved "https://registry.npmmirror.com/glob-parent/download/glob-parent-5.1.2.tgz?cache=0&sync_timestamp=1632953810778&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fglob-parent%2Fdownload%2Fglob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
