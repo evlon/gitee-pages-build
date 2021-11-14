@@ -1,0 +1,18 @@
+{
+  "name": "gitee-pages-build",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:evlon/gitee-pages-build.git",
+  "author": "evlon <evlon@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "fetch-cookie": "^1.0.0",
+    "gitee-client": "^0.2.0",
+    "node-fetch": "^3.1.0",
+    "node-rsa": "^1.1.1",
+    "sleep-anywhere": "^2.1.0",
+    "tough-cookie-file-store": "^2.0.3",
+    "url-search-params": "^1.1.0"
+  }
+}
