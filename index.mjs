@@ -3,7 +3,7 @@ import GiteePage from "./giteePageBuild.mjs";
 import gist from './giteeGistSync.mjs'
 import dotenv from 'dotenv';
 
-async function main() {
+export default async function main() {
 
     if(!process.env.GITEE_USERNAME){
         dotenv.config();
@@ -47,6 +47,6 @@ async function main() {
     }
 
 
-}
+};
 
-main();
+

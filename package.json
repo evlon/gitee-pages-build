@@ -1,6 +1,6 @@
 {
   "name": "gitee-pages-build",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "git@github.com:evlon/gitee-pages-build.git",
   "author": "evlon <evlon@qq.com>",
