@@ -1631,6 +1631,13 @@ tough-cookie-file-store@^2.0.3:
   dependencies:
     tough-cookie "^4.0.0"
 
+tough-cookie-mem-store@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/tough-cookie-mem-store/-/tough-cookie-mem-store-0.1.0.tgz#7e9fe727117cc6f849211d20e81d147292f062f5"
+  integrity sha512-sk+5nXEaY/NXfODRn0dsdRNDbiX+ci0GNTojyOVRVuXepoty81FutVaa5HHBQD1PJYjW7yU1v+b8IePmgX3sjw==
+  dependencies:
+    tough-cookie "^4.0.0"
+
 "tough-cookie@^2.3.3 || ^3.0.1 || ^4.0.0", tough-cookie@^4.0.0:
   version "4.0.0"
   resolved "https://registry.nlark.com/tough-cookie/download/tough-cookie-4.0.0.tgz#d822234eeca882f991f0f908824ad2622ddbece4"

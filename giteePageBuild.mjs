@@ -2,11 +2,12 @@ import nodefetch from 'node-fetch'
 import nodefetchWrap from 'fetch-cookie/node-fetch.js' // use this to get cookie when redirct occus.
 import cookiefetch from 'fetch-cookie'
 import NodeRsa from 'node-rsa'
-import * as cheerio from 'cheerio'
+import cheerio from 'cheerio'
 import URLSearchParams from 'url-search-params'
 import toughCookieLib from 'tough-cookie'
 import cookieFileStoreLib from 'tough-cookie-file-store/lib/cookie-file-store.js'
 import sleep from 'sleep-anywhere'
+import JsonObjectCookieStore  from 'tough-cookie-mem-store'
 
 const CookieJar = toughCookieLib.CookieJar;
 
@@ -22,6 +23,8 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 const GITEE_DOMAIN = 'https://gitee.com'
 
 let fetch = cookiefetch(nodefetchWrap(nodefetch))
+
+
 class GiteePage {
   constructor (username, password,
     repo, branch = 'master',
@@ -32,12 +35,24 @@ class GiteePage {
     this.branch = branch
     this.directory = directory
     this.https = https
+
+    this._jsonCookieObject = null;
   }
 
   async setCookieStoreFile (jsonFilePath) {
     const cookieJar = new CookieJar(new cookieFileStoreLib.FileCookieStore(jsonFilePath))
 
     fetch = cookiefetch(nodefetchWrap(nodefetch), cookieJar)
+  }
+
+  async setCookieStoreJsonObject(jsonObject){
+    this._jsonCookieObject = new JsonObjectCookieStore(jsonObject);
+    const cookieJar = new CookieJar(this._jsonCookieObject);
+    fetch = cookiefetch(nodefetchWrap(nodefetch), cookieJar)
+  }
+
+  async getCookieStoreJsonObject(){
+    return this._jsonCookieObject.getJsonCookieObject();
   }
 
   async login () {

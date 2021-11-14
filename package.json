@@ -30,6 +30,7 @@
     "node-rsa": "^1.1.1",
     "sleep-anywhere": "^2.1.0",
     "tough-cookie-file-store": "^2.0.3",
+    "tough-cookie-mem-store": "^0.1.0",
     "url-search-params": "^1.1.0"
   }
 }
