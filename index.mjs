@@ -38,7 +38,9 @@ export default async function main () {
     const saveResult = await gist.save(process.env.GITEE_GIST_TOKEN, './.cookie.json', process.env.GITEE_GIST_ID)
     console.log('sync cookie to gitee gist  ' + saveResult)
     console.log('build ok')
+    return true;
   } catch (e) {
     console.error(e)
+    return false;
   }
 };
