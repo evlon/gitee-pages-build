@@ -4,9 +4,11 @@ import cookiefetch from 'fetch-cookie'
 import NodeRsa from 'node-rsa'
 import * as cheerio from 'cheerio'
 import URLSearchParams from 'url-search-params'
-import { CookieJar } from 'tough-cookie'
+import toughCookieLib from 'tough-cookie'
 import cookieFileStoreLib from 'tough-cookie-file-store/lib/cookie-file-store.js'
 import sleep from 'sleep-anywhere'
+
+const CookieJar = toughCookieLib.CookieJar;
 
 const PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIrn+WB2Yi4ABAL5Tq6E09tumY
