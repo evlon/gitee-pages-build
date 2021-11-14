@@ -1,5 +1,12 @@
 # gitee-pages-build
-自动登录Gitee并更新pages
+自动登录Gitee并更新pages.
+步骤如下：
+1. 同步Cookie， 从Gitee Gist同步Cookie到本地
+2. 如果Cookie有效，跳过登录，否则执行登录
+3. 执行 page 更新。 （需要提前发布 pages )
+4. 保存Cookie 到 gitee gist
+
+
 
 设置环境变量
 ```
