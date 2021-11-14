@@ -1,6 +1,6 @@
 {
   "name": "gitee-pages-build",
-  "version": "0.1.0.1",
+  "version": "0.1",
   "main": "index.js",
   "author": "evlon <evlon@qq.com>",
   "license": "MIT",
