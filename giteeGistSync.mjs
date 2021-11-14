@@ -1,58 +1,52 @@
-import fs from 'fs';
+import fs from 'fs'
 import path from 'path'
 import fetch from 'node-fetch'
 
+async function sync (token, gistid, file) {
+  const fileNmae = path.basename(file)
+  const resp = await fetch(`https://gitee.com/api/v5/gists/${gistid}?access_token=${token}`)
 
-async function sync(token, gistid, file){
-    let fileNmae = path.basename(file);
-    let resp = await fetch(`https://gitee.com/api/v5/gists/${gistid}?access_token=${token}`);
+  if (resp.status === 200) {
+    const jsonResult = await resp.json()
+    const gistBlob = jsonResult.files[fileNmae]
+    if (gistBlob) {
+      const gitContent = gistBlob.content
+      fs.writeFileSync(file, gitContent, { encoding: 'utf-8' })
 
-    if(resp.status == 200){
-        let jsonResult = await resp.json();
-        let gistBlob = jsonResult.files[fileNmae];
-        if(gistBlob){
-            let gitContent = gistBlob.content;
-            fs.writeFileSync(file, gitContent,{encoding:'utf-8'});
-
-            return true;
-        }       
+      return true
     }
+  }
 
-    return false;
-
+  return false
 }
 
-async function save(token, file,gistid){
+async function save (token, file, gistid) {
+  const fileNmae = path.basename(file)
+  const fileContent = fs.readFileSync(file, { encoding: 'utf8' })
+  const files = {}
+  files[fileNmae] = { content: fileContent }
+  const resp = await fetch(`https://gitee.com/api/v5/gists/${gistid}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
 
-    let fileNmae = path.basename(file);
-    let fileContent = fs.readFileSync(file,{encoding:'utf8'});
-    let files = {};
-    files[fileNmae] = {"content":fileContent};
-    let resp = await fetch(`https://gitee.com/api/v5/gists/${gistid}`,{
-        method:"PATCH",
-        headers:{
-            "Content-Type": "application/json;charset=UTF-8",
-            
-        },
-        body: JSON.stringify({
-            "access_token":token,
-            "files":files,
-            "public":"false"
-        })
-    });
+    },
+    body: JSON.stringify({
+      access_token: token,
+      files: files,
+      public: 'false'
+    })
+  })
 
-    if(resp.status == 200){
-       return true;
-    }
-    else{
-
-        console.log(resp.status, await resp.text());
-        return false;
-    }
-
+  if (resp.status === 200) {
+    return true
+  } else {
+    console.log(resp.status, await resp.text())
+    return false
+  }
 }
 
 export default {
-    sync,
-    save
+  sync,
+  save
 }

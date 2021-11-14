@@ -1,7 +1,6 @@
 import pageBuild from './index.mjs'
 
-pageBuild();
-
+pageBuild()
 
 // gist.save(process.env.GITEE_GIST_TOKEN, "./.cookie.json", process.env.GITEE_GIST_ID);
 

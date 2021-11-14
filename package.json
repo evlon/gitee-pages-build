@@ -16,10 +16,11 @@
     "url": "https://github.com/evlon/gitee-pages-build/issues"
   },
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "fix": "standard --fix"
   },
   "devDependencies": {
-    "standard": "*"
+    "standard": "^16.0.4"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
