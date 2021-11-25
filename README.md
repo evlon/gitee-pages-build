@@ -18,7 +18,9 @@ GITEE_DIRECTORY=/
 GITEE_HTTPS=1
 GITEE_GIST_TOKEN=tokenstring
 GITEE_GIST_ID=gist_id
+CONFIG_DELAY_FETCH=2000
 ```
 
-TODO:
-# 使用VERCEL部署，然后gitee hooks 回调，更新
+
+## 使用VERCEL部署，然后gitee hooks 回调，更新
+[gitee-pages-build-by-vercel.git](https://github.com/evlon/gitee-pages-build-by-vercel.git)

@@ -66,6 +66,9 @@ export async function pagebuild_with_obj_cookie () {
     process.env.GITEE_HTTPS)
   try {
 
+    // add delay from env
+    GiteePage.delayFetch = process.env.CONFIG_DELAY_FETCH || 2000;
+
     let jsonObject = {};
     // sync from gitee gist
     const syncResult = await gist.sync_obj(process.env.GITEE_GIST_TOKEN, process.env.GITEE_GIST_ID, "json_cookie.mem", jsonObject)

@@ -115,7 +115,7 @@ class GiteePage {
       'user[remember_me]': 1
     }
 
-    await sleep(GiteePage.delayFetch || 5000)
+    await sleep(GiteePage.delayFetch || 2000)
     resp = await fetch(login_index_url, {
       method: 'POST',
       // agent: new HttpProxyAgent("http://localhost:8888") ,
