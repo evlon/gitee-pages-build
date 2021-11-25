@@ -30,6 +30,9 @@ export async function pagebuild_with_file_cookie () {
     // login gitee , when cookie is ok ,skip login api
     const loginResult = await gitee.login()
     console.log('login ' + syncResult)
+
+    console.log('sync cookie to gitee gist  ' + saveResult)
+    console.log('build ok')
     // build page
     const buildResult = await gitee.pageBuild()
     console.log('pageBuild ' + buildResult)
