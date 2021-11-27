@@ -152,6 +152,8 @@ export async function pagebuild_with_obj_cookie () {
 };
 
 export default {
+  giteeGistSync: gist,
+  GiteePage: GiteePage,
   gitee_login_with_file_cookie,
   gitee_login_with_obj_cookie,
   pagebuild_with_file_cookie,
