@@ -132,14 +132,14 @@ class GiteePage {
     }
 
     await sleep(GiteePage.delayFetch || 2000)
-    resp = await fetch(login_index_url, {
+    let resp = await fetch(login_index_url, {
       method: 'POST',
       // agent: new HttpProxyAgent("http://localhost:8888") ,
       headers: index_headers,
       body: new URLSearchParams(form_data).toString()
     })
 
-    respText = await resp.text()
+    let respText = await resp.text()
 
     if (resp.url != login_index_url) {
       // redirect to / when ok.
