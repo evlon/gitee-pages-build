@@ -54,12 +54,11 @@ class GiteePage {
   async getCookieStoreJsonObject(){
     return this._jsonCookieObject.getJsonCookieObject();
   }
-
-  async login () {
+  
+  async isLogin(){
     const giteeDomain = GiteePage.giteeDomain || GITEE_DOMAIN
     const login_index_url = `${giteeDomain}/login`
-    const check_login_url = `${giteeDomain}/check_user_login`
-    let form_data = { user_login: this.username }
+
 
     const index_headers = {
       Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -73,14 +72,31 @@ class GiteePage {
       // agent: new HttpProxyAgent("http://localhost:8888") ,
     })
 
+    let isLogined = false;
+
     if (resp.url != login_index_url) {
       // 跳转到主页，说明已经登录好了
-      return true
+      isLogined = true
     }
 
+    
     let respText = await resp.text()
 
     const csrf_token = this.get_csrf_token(respText)
+
+    return {isLogined: isLogined, csrf_token: csrf_token};
+  }
+
+  async doLogin(csrf_token){
+    const giteeDomain = GiteePage.giteeDomain || GITEE_DOMAIN
+    const login_index_url = `${giteeDomain}/login`
+    const check_login_url = `${giteeDomain}/check_user_login`
+    const index_headers = {
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      Host: 'gitee.com',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'User-Agent': USER_AGENT
+    }
 
     const headers = {
       Referer: login_index_url,
@@ -90,13 +106,13 @@ class GiteePage {
       'User-Agent': USER_AGENT
     }
 
-    await sleep(GiteePage.delayFetch || 2000)
-    resp = await fetch(check_login_url, {
-      method: 'POST',
-      // agent: new HttpProxyAgent("http://localhost:8888") ,
-      headers: headers,
-      data: form_data
-    })
+    //await sleep(GiteePage.delayFetch || 2000)
+    // resp = await fetch(check_login_url, {
+    //   method: 'POST',
+    //   // agent: new HttpProxyAgent("http://localhost:8888") ,
+    //   headers: headers,
+    //   data: form_data
+    // })
 
     const data = `${csrf_token}$gitee$${this.password}`
 
@@ -105,7 +121,7 @@ class GiteePage {
 
     const encrypt_data = clientKey.encrypt(data, 'base64')
 
-    form_data = {
+    let form_data = {
       encrypt_key: 'password',
       utf8: '✓',
       authenticity_token: csrf_token,
@@ -127,7 +143,7 @@ class GiteePage {
 
     if (resp.url != login_index_url) {
       // redirect to / when ok.
-      return true
+      return true;
     }
 
     if (respText.indexOf('"message": "帐号或者密码错误"') != -1 ||
@@ -153,7 +169,43 @@ class GiteePage {
       throw `Unknown error occurred in login method, resp: ${respText}`
     }
 
-    return false
+    return false;
+  }
+
+
+  async login () {
+    // const giteeDomain = GiteePage.giteeDomain || GITEE_DOMAIN
+    // const login_index_url = `${giteeDomain}/login`
+    // const check_login_url = `${giteeDomain}/check_user_login`
+    //let form_data = { user_login: this.username }
+
+    // const index_headers = {
+    //   Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    //   Host: 'gitee.com',
+    //   'Content-Type': 'application/x-www-form-urlencoded',
+    //   'User-Agent': USER_AGENT
+    // }
+
+    // let resp = await fetch(login_index_url, {
+    //   headers: index_headers
+    //   // agent: new HttpProxyAgent("http://localhost:8888") ,
+    // })
+
+    // if (resp.url != login_index_url) {
+    //   // 跳转到主页，说明已经登录好了
+    //   return true
+    // }
+
+    let loginStatus = await this.isLogin();
+    if(loginStatus.isLogined){
+      return true
+    }
+
+    const csrf_token = loginStatus.csrf_token
+
+    let loginResult  = await doLogin(csrf_token);
+   
+    return loginResult;
   }
 
   async pageBuild () {
