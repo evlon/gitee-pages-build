@@ -203,7 +203,7 @@ class GiteePage {
 
     const csrf_token = loginStatus.csrf_token
 
-    let loginResult  = await doLogin(csrf_token);
+    let loginResult  = await this.doLogin(csrf_token);
    
     return loginResult;
   }
